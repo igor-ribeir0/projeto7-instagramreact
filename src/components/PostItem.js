@@ -1,17 +1,40 @@
 import React from "react";
 
+let i, j = 0;
+
 export default function PostItem(props){
     const [imagemSalva, setImagemSalva] = React.useState(<ion-icon onClick ={salvarImagem} name="bookmark-outline"></ion-icon>);
     const [likeImagem, setLikeImagem] = React.useState(<ion-icon onClick={like} name="heart-outline"></ion-icon>);
-    const [contador, setContador] = React.useState(101.523);
 
     function salvarImagem(){
-        setImagemSalva(<ion-icon onClick ={salvarImagem} name="bookmark"></ion-icon>);
+        if(j === 0){
+            setImagemSalva(<ion-icon onClick ={salvarImagem} name="bookmark"></ion-icon>);
+            j = 1;
+        }
+        else{
+            setImagemSalva(<ion-icon onClick ={salvarImagem} name="bookmark-outline"></ion-icon>);
+            j = 0;
+        }
     }
 
     function like(){
-        setLikeImagem(<ion-icon onClick={like} name="heart"></ion-icon>);
-        setContador(contador++);
+        if(i === 0){
+            setLikeImagem(<ion-icon onClick={like} name="heart"></ion-icon>);
+            i = 1;
+        }
+        else{
+            setLikeImagem(<ion-icon onClick={like} name="heart-outline"></ion-icon>);
+            i = 0;
+        }
+    }
+
+    function reset(){
+        setLikeImagem(<ion-icon onClick={like} name="heart-outline"></ion-icon>);
+        i = 0;
+    }
+
+    function likeRed(){
+        setLikeImagem(<img onClick={reset} className = "redheart" src="assets/img/heart.jpeg"/>);
     }
 
     return(
@@ -28,7 +51,7 @@ export default function PostItem(props){
                 </div>
 
                 <div className="conteudo">
-                    <img src={props.imagemConteudo} />
+                    <img onClick={likeRed} src={props.imagemConteudo} />
                 </div>
 
                 <div className="fundo">
