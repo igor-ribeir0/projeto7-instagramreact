@@ -1,27 +1,27 @@
-function UsuarioItem(props){
+import React from "react";
+
+export default function Usuario(){
+    const [sub, setSub] = React.useState("Catana");
+    const [imagem, setImagem] = React.useState("assets/img/catanacomics.svg");
+
+    function alterarNome(){
+        setSub(prompt("Novo nome: "));
+    }
+
+    function alterarImagem(){
+        setImagem(prompt("Nova imagem: "));
+    }
+
     return(
         <div className="usuario">
-            <img src={props.imagemUsuario} />
+            <img onClick={alterarImagem} src={!imagem ? "assets/img/catanacomics.svg" : imagem} />
             <div className="texto">
-                <strong>{props.nomeUsuario}</strong>
+                <strong>catanacomics</strong>
                 <span>
-                    {props.subNomeUsuario}
-                    <ion-icon name="pencil"></ion-icon>
+                    {!sub ? "Catana" : sub}
+                    <ion-icon onClick={alterarNome} name="pencil"></ion-icon>
                 </span>
             </div>
         </div>
-    );
-}
-
-export default function Usuario(){
-    const arrayUsuario = [
-        {imagemUsuario: "assets/img/catanacomics.svg", nomeUsuario: "catanacomics", subNomeUsuario: "Catana"}
-    ];
-
-    return(
-        <>
-            {arrayUsuario.map((usuario) => <UsuarioItem key = {usuario.nomeUsuario} imagemUsuario = {usuario.imagemUsuario}
-            nomeUsuario = {usuario.nomeUsuario} subNomeUsuario = {usuario.subNomeUsuario}/>)}
-        </>
     );
 }
